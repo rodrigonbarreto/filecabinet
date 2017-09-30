@@ -1,6 +1,7 @@
 class DocsController < ApplicationController
   before_action :set_doc, only: [:show, :edit, :update, :destroy]
-
+  #check if is logged
+  before_action :authenticate_user!
   # GET /docs
   # GET /docs.json
   def index
