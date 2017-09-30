@@ -4,7 +4,7 @@ class DocsController < ApplicationController
   # GET /docs
   # GET /docs.json
   def index
-    @docs = Doc.all
+    @docs = Doc.where(user_id: current_user)
   end
 
   # GET /docs/1
@@ -14,7 +14,7 @@ class DocsController < ApplicationController
 
   # GET /docs/new
   def new
-    @doc = Doc.new
+    @doc = current_user.docs.build
   end
 
   # GET /docs/1/edit
@@ -24,7 +24,7 @@ class DocsController < ApplicationController
   # POST /docs
   # POST /docs.json
   def create
-    @doc = Doc.new(doc_params)
+    @doc = current_user.docs.build(doc_params)
 
     respond_to do |format|
       if @doc.save
